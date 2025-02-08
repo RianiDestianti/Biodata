@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'nama.dart';
 
 void main() => runApp(const MyApp());
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        fontFamily: '',
+        fontFamily: 'Poppins',
       ),
       home: const FlutterKu(),
     );
@@ -20,65 +21,76 @@ class MyApp extends StatelessWidget {
 class FlutterKu extends StatelessWidget {
   const FlutterKu({Key? key}) : super(key: key);
 
-  Widget _buildInfoCard(String label, String value) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.blue.withOpacity(0.1),
-            spreadRadius: 2,
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.blue.shade50,
-              borderRadius: BorderRadius.circular(12),
+  Widget _buildInfoCard(BuildContext context, String label, String value) {
+    return GestureDetector(
+      onTap: () {
+        if (label == 'Nama') {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const NamaPage()),
+          );
+        }
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.blue.withOpacity(0.1),
+              spreadRadius: 2,
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
-            child: Icon(
-              _getIconForLabel(label),
-              color: Colors.blue.shade600,
-              size: 28,
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.blue.shade50,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Icon(
+                _getIconForLabel(label),
+                color: Colors.blue.shade600,
+                size: 28,
+              ),
             ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.blue.shade400,
-                    fontWeight: FontWeight.w600,
+            const SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.blue.shade400,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  value,
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
+                  const SizedBox(height: 4),
+                  Text(
+                    value,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
+
 
   Widget _buildWelcomeCard() {
     return Container(
@@ -242,41 +254,10 @@ class FlutterKu extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              _buildWelcomeCard(),
-              _buildMotivationalQuote(),
-              _buildInfoCard('Nama', 'Riani Destianti'),
-              _buildInfoCard('Kelas', 'XI RPL 2'),
-              _buildInfoCard('Sekolah', 'SMKN 11 Bandung'),
-              _buildInfoCard('Cita-cita', 'Mobile Developer'),
-              const SizedBox(height: 16),
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.orange.shade50,
-                  borderRadius: BorderRadius.circular(15),
-                  border: Border.all(color: Colors.orange.shade200),
-                ),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.lightbulb,
-                      color: Colors.orange.shade400,
-                      size: 24,
-                    ),
-                    const SizedBox(width: 12),
-                    Expanded(
-                      child: Text(
-                        "Terus belajar dan berkembang. Masa depan yang cerah menanti!",
-                        style: TextStyle(
-                          color: Colors.orange.shade700,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              _buildInfoCard(context, 'Nama', 'Riani Destianti'),
+              _buildInfoCard(context, 'Kelas', 'XI RPL 2'),
+              _buildInfoCard(context, 'Sekolah', 'SMKN 11 Bandung'),
+              _buildInfoCard(context, 'Cita-cita', 'Mobile Developer'),
             ],
           ),
         ),
